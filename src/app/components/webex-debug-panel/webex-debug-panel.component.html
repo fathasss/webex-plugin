@@ -1,0 +1,40 @@
+<div class="debug-panel" *ngIf="isMock" [class.closed]="!isOpen">
+  <div class="panel-header" (click)="togglePanel()">
+    <span>🔧 Webex Mock Environment</span>
+    <button class="toggle-btn">{{ isOpen ? '▼' : '▲' }}</button>
+  </div>
+
+  <div class="panel-content" *ngIf="isOpen && context">
+    <div class="info-section">
+      <div class="info-item">
+        <strong>Environment:</strong> <span class="tag">{{ context.environment | uppercase }}</span>
+      </div>
+      <div class="info-item">
+        <strong>User:</strong> {{ context.user?.displayName || 'None' }}
+      </div>
+      <div class="info-item">
+        <strong>Space:</strong> {{ context.space?.title || 'None' }}
+      </div>
+      <div class="info-item">
+        <strong>Meeting:</strong> {{ context.meeting?.title || 'None' }} 
+        <span class="status-dot" [class.active]="context.meeting?.status === 'active'"></span>
+      </div>
+      <div class="info-item">
+        <strong>Webex Available:</strong> YES
+      </div>
+    </div>
+
+    <div class="actions-section">
+      <h4>Simulate Events</h4>
+      <div class="btn-group">
+        <button (click)="refreshContext()">Get Context</button>
+        <button (click)="testStartMeeting()">Start Meeting</button>
+        <button (click)="testEndMeeting()">End Meeting</button>
+      </div>
+      <div class="btn-group">
+        <button (click)="testChangeTheme('light')">Theme: Light</button>
+        <button (click)="testChangeTheme('dark')">Theme: Dark</button>
+      </div>
+    </div>
+  </div>
+</div>
