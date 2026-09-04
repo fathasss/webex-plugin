@@ -9,6 +9,20 @@ Projeyi bilgisayarınıza indirdikten sonra kütüphaneleri kurmak için:
 npm install
 ```
 
+Daha sonra `.gitignore` dosyasında gizli olan environment (ortam) dosyalarınızı oluşturmanız gerekir. Projede bulunan örnek (example) dosyaları kopyalayarak asıl dosyaları oluşturun:
+
+**Windows (PowerShell) için:**
+```powershell
+cp src/environments/environment.example.ts src/environments/environment.ts
+cp src/environments/environment.prod.example.ts src/environments/environment.prod.ts
+```
+
+**Mac/Linux için:**
+```bash
+cp src/environments/environment.example.ts src/environments/environment.ts
+cp src/environments/environment.prod.example.ts src/environments/environment.prod.ts
+```
+
 ---
 
 ## 🛠️ Mimari: Mock vs Production (Real)
