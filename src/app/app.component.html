@@ -1,0 +1,65 @@
+<div class="app-container">
+  <div class="glass-card">
+    <div class="header">
+      <div class="brand">
+        <div class="logo">
+          <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M12 22C17.5228 22 22 17.5228 22 12C22 6.47715 17.5228 2 12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M2 12H22" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M12 2C14.5013 4.73835 15.9228 8.29203 16 12C15.9228 15.708 14.5013 19.2616 12 22C9.49872 19.2616 8.07725 15.708 8 12C8.07725 8.29203 9.49872 4.73835 12 2V2Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </div>
+        <h2>Webex Plugin</h2>
+      </div>
+      <div class="theme-badge" [class.light]="theme() === 'light'">
+        {{ theme() === 'dark' ? '🌙 Dark Mode' : '☀️ Light Mode' }}
+      </div>
+    </div>
+
+    <div class="status-section">
+      <ng-container *ngIf="errorMessage()">
+        <div class="alert error fade-in">
+          <span class="icon">⚠️</span>
+          <p>{{ errorMessage() }}</p>
+        </div>
+      </ng-container>
+
+      <ng-container *ngIf="isReady() && !errorMessage()">
+        <div class="alert success fade-in slide-up">
+          <span class="icon">✨</span>
+          <div class="content">
+            <h3>Merhaba, {{ userName() }}!</h3>
+            <p>Uygulamanız Webex'e başarıyla bağlandı.</p>
+            <div class="chips-container">
+              <div class="chip">Bağlam: {{ displayContext() }}</div>
+              <div class="chip" *ngIf="meetingId()">Toplantı: Aktif</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="action-buttons fade-in slide-up" style="animation-delay: 0.1s;">
+          <button class="btn btn-primary" (click)="shareWithEveryone()">
+            <span class="btn-icon">👥</span>
+            Uygulamayı Herkesle Paylaş
+          </button>
+          
+          <button class="btn btn-secondary" (click)="openExternalLink()">
+            <span class="btn-icon">🔗</span>
+            Dış Tarayıcıda Doküman Aç
+          </button>
+        </div>
+      </ng-container>
+
+      <ng-container *ngIf="!isReady() && !errorMessage()">
+        <div class="loading-state fade-in">
+          <div class="spinner"></div>
+          <p>Webex SDK'ya bağlanıyor...</p>
+        </div>
+      </ng-container>
+    </div>
+
+    <div class="footer">
+      <p>Powered by Angular & Webex SDK</p>
+    </div>
+  </div>
+</div>
